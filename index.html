@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kasiel — 資安 × 系統 × AI</title>
+<meta name="description" content="Kasiel 的作品集:日誌威脅偵測、後量子密碼展示、漏洞攻防實作。">
+<style>
+:root{--bg:#0b0f17;--bg2:#111826;--card:#141c2b;--line:#222d42;--text:#e6ebf5;--mute:#8b97ad;--acc:#4ade80;--acc2:#38bdf8}
+[data-theme=light]{--bg:#f7f9fc;--bg2:#eef2f8;--card:#fff;--line:#d9e0ec;--text:#16202f;--mute:#5a6678;--acc:#15803d;--acc2:#0369a1}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{background:var(--bg);color:var(--text);font:16px/1.7 system-ui,-apple-system,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+a{color:inherit}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+nav{position:fixed;inset:0 0 auto;z-index:9;display:flex;justify-content:space-between;align-items:center;padding:.8rem 1.5rem;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.logo{font-weight:800;text-decoration:none;color:var(--acc)}
+.links{display:flex;gap:1.4rem;align-items:center;font-size:.9rem}
+.links a{text-decoration:none;color:var(--mute)}.links a:hover{color:var(--acc)}
+#theme{background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.2rem .6rem;cursor:pointer}
+header{min-height:92vh;display:flex;align-items:center;padding:6rem 1.5rem 3rem;background:radial-gradient(60rem 30rem at 80% -10%,color-mix(in srgb,var(--acc2) 18%,transparent),transparent),linear-gradient(var(--line) 1px,transparent 1px) 0 0/100% 48px}
+.wrap{max-width:920px;margin:0 auto;width:100%}
+.hi{color:var(--acc);font-size:.9rem}
+h1{font-size:clamp(2.6rem,9vw,5.2rem);line-height:1.05;letter-spacing:-.03em;margin:.4rem 0 1rem}
+.lead{font-size:1.15rem;color:var(--mute);max-width:36rem}
+.cta{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem}
+.btn{padding:.7rem 1.4rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:.92rem;border:1px solid var(--line)}
+.btn.p{background:var(--acc);color:#06210f;border-color:var(--acc)}.btn:hover{transform:translateY(-2px)}
+section{padding:5rem 1.5rem}section.alt{background:var(--bg2)}
+.lab{color:var(--acc);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase}
+h2{font-size:clamp(1.7rem,4vw,2.4rem);letter-spacing:-.02em;margin:.3rem 0 2rem}
+.grid{display:grid;gap:1.2rem}
+.proj{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.6rem;transition:.25s}
+.proj:hover{border-color:var(--acc);transform:translateY(-3px)}
+.proj h3{font-size:1.3rem}.proj .sub{color:var(--mute);margin:.2rem 0 .8rem}
+.proj ul{margin:.6rem 0 1rem 1.2rem;color:var(--mute);font-size:.94rem}.proj li{margin:.2rem 0}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0}
+.tag{font-size:.74rem;padding:.15rem .6rem;border:1px solid var(--line);border-radius:99px;color:var(--acc2)}
+.pl{display:flex;gap:1rem;font-size:.9rem}.pl a{color:var(--acc);text-decoration:none}.pl a:hover{text-decoration:underline}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem}
+.box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.3rem}
+.box h3{font-size:.95rem;color:var(--acc);margin-bottom:.6rem}.box p,.box li{color:var(--mute);font-size:.93rem}
+.box ul{list-style:none}
+.tl{border-left:2px solid var(--line);padding-left:1.4rem;margin-left:.4rem}
+.tl li{list-style:none;position:relative;margin-bottom:1.1rem;color:var(--mute)}
+.tl li::before{content:"";position:absolute;left:-1.78rem;top:.55rem;width:10px;height:10px;border-radius:50%;background:var(--acc)}
+.tl b{color:var(--text)}.tl .d{font-size:.8rem;color:var(--acc2);display:block}
+.note{font-size:.82rem;color:var(--mute);margin-top:1rem}
+.contact a{display:inline-block;margin:.3rem .8rem .3rem 0}
+footer{text-align:center;padding:2rem;color:var(--mute);font-size:.8rem;border-top:1px solid var(--line)}
+.rv{opacity:0;transform:translateY(24px);transition:.6s}.rv.on{opacity:1;transform:none}
+@media(max-width:640px){.links a:not(#theme){display:none}.links a.keep{display:inline}}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo mono" href="#top">kasiel@portfolio:~$</a>
+  <div class="links"><a href="#projects">專案</a><a href="#skills">技能</a><a href="#path">履歷</a><a class="keep" href="#contact">聯絡</a><button id="theme" aria-label="切換深淺色">◐</button></div>
+</nav>
+
+<header id="top"><div class="wrap">
+  <p class="hi mono">&gt; hello, world</p>
+  <h1>Kasiel</h1>
+  <p class="lead">資訊工程學生,專注於<b>資訊安全、系統與 AI</b>。喜歡把攻擊與防禦都實際做出來,再用數據與文件說明為什麼。目標:資工所。</p>
+  <div class="cta"><a class="btn p" href="#projects">看專案</a><a class="btn" href="https://github.com/hengchen17" target="_blank" rel="noopener">GitHub ↗</a><a class="btn" href="#contact">聯絡我</a></div>
+</div></header>
+
+<section id="projects"><div class="wrap">
+  <p class="lab rv">Featured Projects</p><h2 class="rv">主力專案</h2>
+  <div class="grid">
+    <article class="proj rv">
+      <h3>LogSentinel</h3><p class="sub">Nginx / Apache 存取日誌威脅偵測工具</p>
+      <p>輸入一份 access log,自動找出攻擊行為並產出可互動的 HTML 報告,不需資料庫或第三方服務。</p>
+      <ul>
+        <li>偵測 SQLi、XSS、路徑遍歷、指令注入、敏感檔案存取、惡意掃描工具與暴力破解</li>
+        <li>複合攻擊標記:單一請求命中多種特徵時提高該 IP 威脅分數</li>
+        <li>時間窗口掃描偵測(雙指標,O(n log n)),規則集中於 <span class="mono">rules.py</span> 可擴充</li>
+        <li>pytest 單元測試與 GitHub Actions CI</li>
+      </ul>
+      <div class="tags"><span class="tag">Python</span><span class="tag">Chart.js</span><span class="tag">pytest</span><span class="tag">GitHub Actions</span></div>
+      <div class="pl"><a href="https://github.com/hengchen17/LogSentinel" target="_blank" rel="noopener">原始碼 ↗</a></div>
+    </article>
+    <article class="proj rv">
+      <h3>PQC Quantum Threat Demo</h3><p class="sub">用真實量子電路破解 RSA,再展示後量子密碼為何免疫</p>
+      <p>左側以 Qiskit 實跑 Shor’s Algorithm(N=15),右側展示基於格的 ML-KEM 面對同樣攻擊為何失效。</p>
+      <ul>
+        <li>ML-KEM / ML-DSA / Falcon / SPHINCS+ 效能與體積比較</li>
+        <li>以高頻交易為例,量化 PQC 簽章的遷移成本</li>
+        <li>附研究誠實性聲明:說明模擬器規模與 RSA-2048 實際需求的差距</li>
+      </ul>
+      <div class="tags"><span class="tag">Python</span><span class="tag">Qiskit</span><span class="tag">Flask</span><span class="tag">NIST FIPS 203/204/205</span></div>
+      <div class="pl"><a href="https://hengchen17.github.io/pqc-quantum-threat-demo/" target="_blank" rel="noopener">Live Demo ↗</a><a href="https://github.com/hengchen17/pqc-quantum-threat-demo" target="_blank" rel="noopener">原始碼 ↗</a></div>
+    </article>
+    <article class="proj rv">
+      <h3>Vulnerable Web App Demo</h3><p class="sub">刻意留洞的 Flask 員工入口:攻擊、再修補</p>
+      <p>四個漏洞串成一條從匿名訪客到管理員資料外洩的攻擊鏈,每個都有 PoC 文件,並在 <span class="mono">patched</span> 分支提供修補版對照。</p>
+      <ul>
+        <li>SQL Injection、IDOR、Stored XSS、Prompt Injection(AI 助理)</li>
+        <li>對應 OWASP Top 10 與 OWASP LLM Top 10</li>
+      </ul>
+      <div class="tags"><span class="tag">Flask</span><span class="tag">OWASP</span><span class="tag">PoC 撰寫</span></div>
+      <div class="pl"><a href="https://github.com/hengchen17/vulnerable-webapp-demo" target="_blank" rel="noopener">原始碼 ↗</a></div>
+      <p class="note">僅供教育用途,請勿部署到公開環境。</p>
+    </article>
+  </div>
+  <p class="note rv">更多練習(LeetCode、爬蟲)請見 <a href="https://github.com/hengchen17">GitHub</a>。</p>
+</div></section>
+
+<section id="skills" class="alt"><div class="wrap">
+  <p class="lab rv">Skills</p><h2 class="rv">技能</h2>
+  <div class="cols">
+    <div class="box rv"><h3>Languages</h3><ul><li>Python(主力)</li><li>Rust、JavaScript(HTML/CSS)</li><li>LeetCode 演算法練習</li></ul></div>
+    <div class="box rv"><h3>Security</h3><ul><li>OWASP Top 10 / LLM Top 10</li><li>日誌分析與入侵偵測規則</li><li>密碼學:RSA、Shor、格密碼(PQC)</li></ul></div>
+    <div class="box rv"><h3>Tooling</h3><ul><li>Flask、Qiskit、BeautifulSoup</li><li>Git、GitHub Actions、pytest</li></ul></div>
+  </div>
+</div></section>
+
+<section id="path"><div class="wrap">
+  <p class="lab rv">Background</p><h2 class="rv">履歷</h2>
+  <div class="cols" style="margin-bottom:2.5rem">
+    <div class="box rv"><h3>Education</h3><p><b>大學 · 大三在學</b><br>準備報考資工所,方向:資安 / 系統 / AI。</p></div>
+    <!-- 取得證照後,複製下方整個 box 並填入內容(目前沒有就保持註解):
+    <div class="box rv"><h3>Certifications</h3><ul><li>證照名稱 · 發證單位 · 年份</li></ul></div> -->
+  </div>
+  <p class="lab rv">GitHub Timeline</p>
+  <ul class="tl rv" style="margin-top:1rem">
+    <li><span class="d mono">2026-09</span><b>vulnerable-webapp-demo</b> 漏洞攻擊鏈與修補版</li>
+    <li><span class="d mono">2026-08</span><b>LogSentinel</b> 日誌威脅偵測工具</li>
+    <li><span class="d mono">2026-07</span><b>pqc-quantum-threat-demo</b> 量子威脅與 PQC 展示</li>
+    <li><span class="d mono">2025-06</span><b>Rust 解題</b> LeetCode(Rust)</li>
+    <li><span class="d mono">2025-04</span><b>網頁爬蟲</b> requests + BeautifulSoup</li>
+    <li><span class="d mono">2025-03</span><b>LeetCode</b> Python 解題</li>
+  </ul>
+  <p class="note">時間為各 repo 最後更新月份。</p>
+</div></section>
+
+<section id="contact" class="alt"><div class="wrap contact">
+  <p class="lab rv">Contact</p><h2 class="rv">聯絡我</h2>
+  <p class="rv" style="color:var(--mute);margin-bottom:1rem">歡迎討論資安、研究方向或合作機會。</p>
+  <p class="rv"><a class="btn p" href="mailto:bhchen0217@gmail.com">✉ bhchen0217@gmail.com</a><a class="btn" href="https://github.com/hengchen17" target="_blank" rel="noopener">GitHub ↗</a></p>
+</div></section>
+
+<footer>© Kasiel · 手刻,無框架</footer>
+
+<script>
+const root=document.documentElement,btn=document.getElementById('theme');
+let t='dark';
+try{t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')}catch(e){}
+root.dataset.theme=t;
+btn.onclick=()=>{t=root.dataset.theme==='dark'?'light':'dark';root.dataset.theme=t;try{localStorage.setItem('theme',t)}catch(e){}};
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
